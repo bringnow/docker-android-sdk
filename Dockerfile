@@ -31,6 +31,5 @@ RUN wget -nv http://dl.google.com/android/android-sdk_r${ANDROID_SDK_VERSION}-li
 
 # Install Android SDK components
 
-ENV ANDROID_COMPONENTS 
-build-tools-22.0.1,extra-android-m2repository,extra-android-support,extra-google-google_play_services,extra-google-m2repository,android-19,addon-google_apis-google-19,android-22,addon-google_apis-google-22
+ENV ANDROID_COMPONENTS build-tools-22.0.1,extra-android-m2repository,extra-android-support,extra-google-google_play_services,extra-google-m2repository,android-19,addon-google_apis-google-19,android-22,addon-google_apis-google-22
 RUN echo "y" | ${ANDROID_HOME}/tools/android update sdk --no-ui --all --filter $ANDROID_COMPONENTS
