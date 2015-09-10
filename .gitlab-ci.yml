@@ -1,9 +1,9 @@
 build_image:
   stage: build
   script:
-  - docker build -t docker-registry.bringnow.com/bringnow/gitlab-ci-runner-docker-image-android:latest .
+  - docker build -t docker-registry.bringnow.com/bringnow/docker-image-android:latest .
 
 deploy_image:
    stage: deploy
    script:
-   - docker push docker-registry.bringnow.com/bringnow/gitlab-ci-runner-docker-image-android:latest
+   - docker push docker-registry.bringnow.com/bringnow/docker-image-android:latest
