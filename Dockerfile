@@ -26,6 +26,7 @@ RUN apt-get install -y --no-install-recommends openjdk-8-jdk
 RUN apt-get install -y --no-install-recommends curl
 RUN apt-get install -y --no-install-recommends libncurses5:i386 libstdc++6:i386 zlib1g:i386
 RUN apt-get install -y --no-install-recommends maven
+RUN apt-get install -y --no-install-recommends git # needed by gitlab-runner
 
 ENV ANDROID_SDK_VERSION 24.3.4
 ENV ANDROID_HOME /opt/android-sdk-linux
