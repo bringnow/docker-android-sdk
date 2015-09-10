@@ -16,7 +16,7 @@ RUN apt-get update
 RUN apt-get upgrade -y
 
 # Install required packages 
-RUN apt-get install -y openjdk-7-jdk unzip zip ant
+RUN apt-get install -y openjdk-7-jdk unzip zip ant wget
 
 # add 32-bit libraries needed for Android Tools (adb, aapt)
 RUN apt-get install -y libc6-i386 lib32stdc++6 lib32gcc1 lib32ncurses5 lib32z1
