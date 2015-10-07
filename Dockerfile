@@ -20,19 +20,20 @@ RUN apt-get update -qq
 # Update packages
 RUN apt-get upgrade -y
 
-# Install required packages 
+# Install required packages
 RUN apt-get install -y expect
-RUN apt-get install -y --no-install-recommends openjdk-8-jdk 
+RUN apt-get install -y --no-install-recommends openjdk-8-jdk
 RUN apt-get install -y --no-install-recommends curl
 RUN apt-get install -y --no-install-recommends libncurses5:i386 libstdc++6:i386 zlib1g:i386
 RUN apt-get install -y --no-install-recommends maven
 RUN apt-get install -y --no-install-recommends git # needed by gitlab-runner
+RUN apt-get install -y --no-install-recommends npm # needed to install cordova
 
 ENV ANDROID_SDK_VERSION 24.3.4
 ENV ANDROID_HOME /opt/android-sdk-linux
 
 # Install Android SDK installer
-RUN curl -O http://dl.google.com/android/android-sdk_r${ANDROID_SDK_VERSION}-linux.tgz 
+RUN curl -O http://dl.google.com/android/android-sdk_r${ANDROID_SDK_VERSION}-linux.tgz
 RUN tar xf android-sdk*.tgz -C /opt
 RUN rm android-sdk*.tgz
 
@@ -47,7 +48,7 @@ RUN ["/opt/sdk-tools/android-accept-licenses.sh", "android update sdk --filter \
 RUN ["/opt/sdk-tools/android-accept-licenses.sh", "android update sdk --filter \"extra-android-support\" --no-ui --force -a"]
 RUN ["/opt/sdk-tools/android-accept-licenses.sh", "android update sdk --filter \"android-23\" --no-ui --force -a"]
 RUN ["/opt/sdk-tools/android-accept-licenses.sh", "android update sdk --filter \"addon-google_apis-google-23\" --no-ui --force -a"]
-RUN ["/opt/sdk-tools/android-accept-licenses.sh", "android update sdk --filter \"sys-img-armeabi-v7a-addon-google_apis-google-23\" --no-ui --force -a"] 
+RUN ["/opt/sdk-tools/android-accept-licenses.sh", "android update sdk --filter \"sys-img-armeabi-v7a-addon-google_apis-google-23\" --no-ui --force -a"]
 RUN ["/opt/sdk-tools/android-accept-licenses.sh", "android update sdk --filter \"extra-android-m2repository\" --no-ui --force -a"]
 RUN ["/opt/sdk-tools/android-accept-licenses.sh", "android update sdk --filter \"extra-google-m2repository\" --no-ui --force -a"]
 RUN ["/opt/sdk-tools/android-accept-licenses.sh", "android update sdk --filter \"extra-google-google_play_services\" --no-ui --force -a"]
