@@ -14,6 +14,8 @@ RUN dpkg --add-architecture i386
 # "date -R > .docker_cache_last_updated"
 ADD .docker_cache_last_updated /
 
+RUN sed -i -e "s/\/\/archive\.ubuntu/\/\/de.archive.ubuntu/" /etc/apt/sources.list
+
 # Update package list
 RUN apt-get update -qq
 
