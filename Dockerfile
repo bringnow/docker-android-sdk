@@ -29,6 +29,10 @@ RUN apt-get install -y --no-install-recommends curl
 RUN apt-get install -y --no-install-recommends libncurses5:i386 libstdc++6:i386 zlib1g:i386
 RUN apt-get install -y --no-install-recommends maven
 RUN apt-get install -y --no-install-recommends git # needed by gitlab-runner
+
+# Install nodejs 0.12.x
+RUN curl -sL https://deb.nodesource.com/setup_0.12 | bash -
+
 RUN apt-get install -y --no-install-recommends nodejs npm # needed to install cordova
 
 # Some dependencies need a 'node' executable, so link it to 'nodejs'
