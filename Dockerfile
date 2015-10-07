@@ -33,7 +33,7 @@ RUN apt-get install -y --no-install-recommends git # needed by gitlab-runner
 # Install nodejs 0.12.x
 RUN curl -sL https://deb.nodesource.com/setup_0.12 | bash -
 
-RUN apt-get install -y --no-install-recommends nodejs npm # needed to install cordova
+RUN apt-get install -y --no-install-recommends nodejs # needed to install cordova
 
 # Some dependencies need a 'node' executable, so link it to 'nodejs'
 RUN update-alternatives --install /usr/bin/node node /usr/bin/nodejs 10
