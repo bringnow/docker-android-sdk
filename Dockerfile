@@ -29,7 +29,14 @@ RUN apt-get install -y --no-install-recommends curl
 RUN apt-get install -y --no-install-recommends libncurses5:i386 libstdc++6:i386 zlib1g:i386
 RUN apt-get install -y --no-install-recommends maven
 RUN apt-get install -y --no-install-recommends git # needed by gitlab-runner
-RUN apt-get install -y --no-install-recommends npm # needed to install cordova
+RUN apt-get install -y --no-install-recommends nodejs npm # needed to install cordova
+
+# Some dependencies need a 'node' executable, so link it to 'nodejs'
+RUN update-alternatives --install /usr/bin/node node /usr/bin/nodejs 10
+
+# Set timezone to Europe/Berlin
+ENV TZ=Europe/Berlin
+RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
 
 ENV ANDROID_SDK_VERSION 24.3.4
 ENV ANDROID_HOME /opt/android-sdk-linux
