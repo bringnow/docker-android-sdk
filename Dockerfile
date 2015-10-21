@@ -42,7 +42,7 @@ RUN update-alternatives --install /usr/bin/node node /usr/bin/nodejs 10
 ENV TZ=Europe/Berlin
 RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
 
-ENV ANDROID_SDK_VERSION 24.3.4
+ENV ANDROID_SDK_VERSION 24.4.1
 ENV ANDROID_HOME /opt/android-sdk-linux
 
 # Install Android SDK installer
