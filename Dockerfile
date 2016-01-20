@@ -1,70 +1,46 @@
-FROM ubuntu:15.04
+FROM ubuntu:15.10
 
 # Inspired from https://github.com/heikomaass/docker-android/blob/master/android-sdk/Dockerfile
 
 MAINTAINER Fabian Köster <fabian.koester@bringnow.com>
 
-ENV DEBIAN_FRONTEND noninteractive
+ENV ANDROID_SDK_VERSION 24.4.1
+ENV ANDROID_HOME /opt/android-sdk-linux
 
 RUN dpkg --add-architecture i386
-
-# The file .dockercacheupdated is compared by docker to the last one
-# in order to decide if the cache needs to be invalidated. If you want to
-# force docker to update the cache, execute
-# "date -R > .docker_cache_last_updated"
-ADD .docker_cache_last_updated /
-
-RUN sed -i -e "s/\/\/archive\.ubuntu/\/\/de.archive.ubuntu/" /etc/apt/sources.list
 
 # Update package list
 RUN apt-get update -qq
 
-# Update packages
-RUN apt-get upgrade -y
+# Install required packages (git required by gitlab-runner)
+RUN DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends expect openjdk-8-jdk curl libncurses5:i386 libstdc++6:i386 zlib1g:i386 maven git
 
-# Install required packages
-RUN apt-get install -y expect
-RUN apt-get install -y --no-install-recommends openjdk-8-jdk
-RUN apt-get install -y --no-install-recommends curl
-RUN apt-get install -y --no-install-recommends libncurses5:i386 libstdc++6:i386 zlib1g:i386
-RUN apt-get install -y --no-install-recommends maven
-RUN apt-get install -y --no-install-recommends git # needed by gitlab-runner
+# Install nodejs 4.x
+RUN curl -sL https://deb.nodesource.com/setup_4.x | bash -
 
-# Install nodejs 0.12.x
-RUN curl -sL https://deb.nodesource.com/setup_0.12 | bash -
-
-RUN apt-get install -y --no-install-recommends nodejs # needed to install cordova
+RUN DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends nodejs # needed to install cordova
 
 # Some dependencies need a 'node' executable, so link it to 'nodejs'
 RUN update-alternatives --install /usr/bin/node node /usr/bin/nodejs 10
 
-# Set timezone to Europe/Berlin
-ENV TZ=Europe/Berlin
-RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
-
-ENV ANDROID_SDK_VERSION 24.4.1
-ENV ANDROID_HOME /opt/android-sdk-linux
-
 # Install Android SDK installer
-RUN curl -O http://dl.google.com/android/android-sdk_r${ANDROID_SDK_VERSION}-linux.tgz
-RUN tar xf android-sdk*.tgz -C /opt
-RUN rm android-sdk*.tgz
+RUN curl -O http://dl.google.com/android/android-sdk_r${ANDROID_SDK_VERSION}-linux.tgz && \
+    tar xf android-sdk*.tgz -C /opt  && \
+    rm android-sdk*.tgz
 
 COPY tools /opt/sdk-tools
 
 ENV PATH ${PATH}:${ANDROID_HOME}/tools:${ANDROID_HOME}/platform-tools:/opt/sdk-tools
 
 # Install Android SDK components
-RUN ["/opt/sdk-tools/android-accept-licenses.sh", "android update sdk --filter tools --no-ui --force -a"]
-RUN ["/opt/sdk-tools/android-accept-licenses.sh", "android update sdk --filter platform-tools --no-ui --force -a"]
-RUN ["/opt/sdk-tools/android-accept-licenses.sh", "android update sdk --filter \"build-tools-23.0.2\" --no-ui --force -a"]
-RUN ["/opt/sdk-tools/android-accept-licenses.sh", "android update sdk --filter \"extra-android-support\" --no-ui --force -a"]
-RUN ["/opt/sdk-tools/android-accept-licenses.sh", "android update sdk --filter \"android-22\" --no-ui --force -a"]
-RUN ["/opt/sdk-tools/android-accept-licenses.sh", "android update sdk --filter \"android-23\" --no-ui --force -a"]
-RUN ["/opt/sdk-tools/android-accept-licenses.sh", "android update sdk --filter \"addon-google_apis-google-23\" --no-ui --force -a"]
-RUN ["/opt/sdk-tools/android-accept-licenses.sh", "android update sdk --filter \"sys-img-armeabi-v7a-addon-google_apis-google-23\" --no-ui --force -a"]
-RUN ["/opt/sdk-tools/android-accept-licenses.sh", "android update sdk --filter \"extra-android-m2repository\" --no-ui --force -a"]
-RUN ["/opt/sdk-tools/android-accept-licenses.sh", "android update sdk --filter \"extra-google-m2repository\" --no-ui --force -a"]
-RUN ["/opt/sdk-tools/android-accept-licenses.sh", "android update sdk --filter \"extra-google-google_play_services\" --no-ui --force -a"]
-
-RUN apt-get clean
+RUN /opt/sdk-tools/android-accept-licenses.sh android update sdk --filter tools --no-ui --force -a && \
+    /opt/sdk-tools/android-accept-licenses.sh android update sdk --filter platform-tools --no-ui --force -a && \
+    /opt/sdk-tools/android-accept-licenses.sh android update sdk --filter build-tools-23.0.2 --no-ui --force -a && \
+    /opt/sdk-tools/android-accept-licenses.sh android update sdk --filter extra-android-support --no-ui --force -a && \
+    /opt/sdk-tools/android-accept-licenses.sh android update sdk --filter android-22 --no-ui --force -a && \
+    /opt/sdk-tools/android-accept-licenses.sh android update sdk --filter android-23 --no-ui --force -a && \
+    /opt/sdk-tools/android-accept-licenses.sh android update sdk --filter addon-google_apis-google-23 --no-ui --force -a && \
+    /opt/sdk-tools/android-accept-licenses.sh android update sdk --filter sys-img-armeabi-v7a-addon-google_apis-google-23 --no-ui --force -a && \
+    /opt/sdk-tools/android-accept-licenses.sh android update sdk --filter extra-android-m2repository --no-ui --force -a && \
+    /opt/sdk-tools/android-accept-licenses.sh android update sdk --filter extra-google-m2repository --no-ui --force -a && \
+    /opt/sdk-tools/android-accept-licenses.sh android update sdk --filter extra-google-google_play_services --no-ui --force -a
