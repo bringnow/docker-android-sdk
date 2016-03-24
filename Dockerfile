@@ -33,16 +33,15 @@ COPY tools /opt/sdk-tools
 ENV PATH ${PATH}:${ANDROID_HOME}/tools:${ANDROID_HOME}/platform-tools:/opt/sdk-tools
 
 # Install Android SDK components
-RUN /opt/sdk-tools/android-accept-licenses.sh android update sdk --filter tools --no-ui --force -a && \
-    /opt/sdk-tools/android-accept-licenses.sh android update sdk --filter platform-tools --no-ui --force -a && \
-    /opt/sdk-tools/android-accept-licenses.sh android update sdk --filter build-tools-23.0.1 --no-ui --force -a && \
-    /opt/sdk-tools/android-accept-licenses.sh android update sdk --filter build-tools-23.0.2 --no-ui --force -a && \
-    /opt/sdk-tools/android-accept-licenses.sh android update sdk --filter build-tools-23.0.3 --no-ui --force -a && \
-    /opt/sdk-tools/android-accept-licenses.sh android update sdk --filter extra-android-support --no-ui --force -a && \
-    /opt/sdk-tools/android-accept-licenses.sh android update sdk --filter android-22 --no-ui --force -a && \
-    /opt/sdk-tools/android-accept-licenses.sh android update sdk --filter android-23 --no-ui --force -a && \
-    /opt/sdk-tools/android-accept-licenses.sh android update sdk --filter addon-google_apis-google-23 --no-ui --force -a && \
-    /opt/sdk-tools/android-accept-licenses.sh android update sdk --filter sys-img-armeabi-v7a-addon-google_apis-google-23 --no-ui --force -a && \
-    /opt/sdk-tools/android-accept-licenses.sh android update sdk --filter extra-android-m2repository --no-ui --force -a && \
-    /opt/sdk-tools/android-accept-licenses.sh android update sdk --filter extra-google-m2repository --no-ui --force -a && \
-    /opt/sdk-tools/android-accept-licenses.sh android update sdk --filter extra-google-google_play_services --no-ui --force -a
+RUN ["/opt/sdk-tools/android-accept-licenses.sh", "android update sdk --filter tools --no-ui --force -a"]
+RUN ["/opt/sdk-tools/android-accept-licenses.sh", "android update sdk --filter platform-tools --no-ui --force -a"]
+RUN ["/opt/sdk-tools/android-accept-licenses.sh", "android update sdk --filter \"build-tools-23.0.1\" --no-ui --force -a"]
+RUN ["/opt/sdk-tools/android-accept-licenses.sh", "android update sdk --filter \"build-tools-23.0.2\" --no-ui --force -a"]
+RUN ["/opt/sdk-tools/android-accept-licenses.sh", "android update sdk --filter \"build-tools-23.0.3\" --no-ui --force -a"]
+RUN ["/opt/sdk-tools/android-accept-licenses.sh", "android update sdk --filter \"extra-android-support\" --no-ui --force -a"]
+RUN ["/opt/sdk-tools/android-accept-licenses.sh", "android update sdk --filter \"android-22\" --no-ui --force -a"]
+RUN ["/opt/sdk-tools/android-accept-licenses.sh", "android update sdk --filter \"android-23\" --no-ui --force -a"]
+RUN ["/opt/sdk-tools/android-accept-licenses.sh", "android update sdk --filter \"addon-google_apis-google-23\" --no-ui --force -a"]
+RUN ["/opt/sdk-tools/android-accept-licenses.sh", "android update sdk --filter \"extra-android-m2repository\" --no-ui --force -a"]
+RUN ["/opt/sdk-tools/android-accept-licenses.sh", "android update sdk --filter \"extra-google-m2repository\" --no-ui --force -a"]
+RUN ["/opt/sdk-tools/android-accept-licenses.sh", "android update sdk --filter \"extra-google-google_play_services\" --no-ui --force -a"]
