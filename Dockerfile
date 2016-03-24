@@ -13,12 +13,12 @@ RUN dpkg --add-architecture i386
 RUN apt-get update -qq
 
 # Install required packages (git required by gitlab-runner)
-RUN DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends expect openjdk-8-jdk curl libncurses5:i386 libstdc++6:i386 zlib1g:i386 maven git
+RUN DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends expect openjdk-8-jdk curl libncurses5:i386 libstdc++6:i386 zlib1g:i386 maven git python build-essential
 
-# Install nodejs 4.x
-RUN curl -sL https://deb.nodesource.com/setup_4.x | bash -
+# Install nodejs 5.x for Cordova, React Native etc.
+RUN curl -sL https://deb.nodesource.com/setup_5.x | bash -
 
-RUN DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends nodejs # needed to install cordova
+RUN DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends nodejs
 
 # Some dependencies need a 'node' executable, so link it to 'nodejs'
 RUN update-alternatives --install /usr/bin/node node /usr/bin/nodejs 10
@@ -35,7 +35,9 @@ ENV PATH ${PATH}:${ANDROID_HOME}/tools:${ANDROID_HOME}/platform-tools:/opt/sdk-t
 # Install Android SDK components
 RUN /opt/sdk-tools/android-accept-licenses.sh android update sdk --filter tools --no-ui --force -a && \
     /opt/sdk-tools/android-accept-licenses.sh android update sdk --filter platform-tools --no-ui --force -a && \
+    /opt/sdk-tools/android-accept-licenses.sh android update sdk --filter build-tools-23.0.1 --no-ui --force -a && \
     /opt/sdk-tools/android-accept-licenses.sh android update sdk --filter build-tools-23.0.2 --no-ui --force -a && \
+    /opt/sdk-tools/android-accept-licenses.sh android update sdk --filter build-tools-23.0.3 --no-ui --force -a && \
     /opt/sdk-tools/android-accept-licenses.sh android update sdk --filter extra-android-support --no-ui --force -a && \
     /opt/sdk-tools/android-accept-licenses.sh android update sdk --filter android-22 --no-ui --force -a && \
     /opt/sdk-tools/android-accept-licenses.sh android update sdk --filter android-23 --no-ui --force -a && \
