@@ -1,4 +1,4 @@
-FROM ubuntu:15.10
+FROM ubuntu:16.04
 
 # Inspired from https://github.com/heikomaass/docker-android/blob/master/android-sdk/Dockerfile
 
