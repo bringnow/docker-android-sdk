@@ -39,6 +39,8 @@ RUN ["/opt/sdk-tools/android-accept-licenses.sh", "android update sdk --filter \
 RUN ["/opt/sdk-tools/android-accept-licenses.sh", "android update sdk --filter \"build-tools-23.0.2\" --no-ui --force -a"]
 RUN ["/opt/sdk-tools/android-accept-licenses.sh", "android update sdk --filter \"build-tools-23.0.3\" --no-ui --force -a"]
 RUN ["/opt/sdk-tools/android-accept-licenses.sh", "android update sdk --filter \"build-tools-24.0.2\" --no-ui --force -a"]
+RUN ["/opt/sdk-tools/android-accept-licenses.sh", "android update sdk --filter \"build-tools-24.0.3\" --no-ui --force -a"]
+RUN ["/opt/sdk-tools/android-accept-licenses.sh", "android update sdk --filter \"build-tools-25.2.2\" --no-ui --force -a"]
 RUN ["/opt/sdk-tools/android-accept-licenses.sh", "android update sdk --filter \"extra-android-support\" --no-ui --force -a"]
 RUN ["/opt/sdk-tools/android-accept-licenses.sh", "android update sdk --filter \"android-22\" --no-ui --force -a"]
 RUN ["/opt/sdk-tools/android-accept-licenses.sh", "android update sdk --filter \"android-23\" --no-ui --force -a"]
