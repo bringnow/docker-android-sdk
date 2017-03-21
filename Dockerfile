@@ -6,9 +6,9 @@ ARG DEBIAN_FRONTEND=noninteractive
 
 ENV ANDROID_HOME /opt/android-sdk-linux
 
-RUN bash -c "echo deb http://ftp.debian.org/debian jessie-backports main contrib non-free >> /etc/apt/sources.list" \
+RUN bash -c "echo deb http://ftp.debian.org/debian jessie-backports main >> /etc/apt/sources.list" \
   && dpkg --add-architecture i386 \
-  && apt-get update && apt-get install -y --no-install-recommends \
+  && apt-get update && apt-get install -t jessie-backports -y --no-install-recommends \
     expect \
     openjdk-8-jdk \
     libncurses5:i386 \
