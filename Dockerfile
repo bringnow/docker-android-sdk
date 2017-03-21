@@ -8,15 +8,14 @@ ENV ANDROID_HOME /opt/android-sdk-linux
 
 RUN bash -c "echo deb http://ftp.debian.org/debian jessie-backports main >> /etc/apt/sources.list" \
   && dpkg --add-architecture i386 \
-  && apt-get update && apt-get install -t jessie-backports -y --no-install-recommends \
+  && apt-get update && apt-get install -t jessie-backports -y --no-install-recommends openjdk-8-jdk-headless \
     expect \
-    openjdk-8-jdk-headless \
     libncurses5:i386 \
     libstdc++6:i386 \
     zlib1g:i386 \
-    maven \
     build-essential \
- && rm -rf /var/lib/apt/lists/*
+  && apt-get install -y --no-install-recommends maven \
+  && rm -rf /var/lib/apt/lists/*
 
 # Install Android SDK installer
 ARG ANDROID_SDK_VERSION=24.4.1
