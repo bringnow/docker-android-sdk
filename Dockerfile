@@ -10,7 +10,7 @@ RUN bash -c "echo deb http://ftp.debian.org/debian jessie-backports main >> /etc
   && dpkg --add-architecture i386 \
   && apt-get update && apt-get install -t jessie-backports -y --no-install-recommends \
     expect \
-    openjdk-8-jdk \
+    openjdk-8-jdk-headless \
     libncurses5:i386 \
     libstdc++6:i386 \
     zlib1g:i386 \
