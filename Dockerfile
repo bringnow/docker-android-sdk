@@ -14,6 +14,7 @@ RUN bash -c "echo deb http://ftp.debian.org/debian jessie-backports main >> /etc
     libstdc++6:i386 \
     zlib1g:i386 \
     build-essential \
+    openssh-client \
   && apt-get install -y --no-install-recommends maven \
   && rm -rf /var/lib/apt/lists/*
 
