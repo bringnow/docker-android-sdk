@@ -39,11 +39,13 @@ RUN /opt/sdk-tools/android-accept-licenses.sh "android update sdk --filter tools
   && /opt/sdk-tools/android-accept-licenses.sh "android update sdk --filter \"build-tools-24.0.2\" --no-ui --force -a" \
   && /opt/sdk-tools/android-accept-licenses.sh "android update sdk --filter \"build-tools-24.0.3\" --no-ui --force -a" \
   && /opt/sdk-tools/android-accept-licenses.sh "android update sdk --filter \"build-tools-25.0.2\" --no-ui --force -a" \
+  && /opt/sdk-tools/android-accept-licenses.sh "android update sdk --filter \"build-tools-26.0.1\" --no-ui --force -a" \
   && /opt/sdk-tools/android-accept-licenses.sh "android update sdk --filter \"extra-android-support\" --no-ui --force -a" \
   && /opt/sdk-tools/android-accept-licenses.sh "android update sdk --filter \"android-22\" --no-ui --force -a" \
   && /opt/sdk-tools/android-accept-licenses.sh "android update sdk --filter \"android-23\" --no-ui --force -a" \
   && /opt/sdk-tools/android-accept-licenses.sh "android update sdk --filter \"android-24\" --no-ui --force -a" \
   && /opt/sdk-tools/android-accept-licenses.sh "android update sdk --filter \"android-25\" --no-ui --force -a" \
+  && /opt/sdk-tools/android-accept-licenses.sh "android update sdk --filter \"android-26\" --no-ui --force -a" \
   && /opt/sdk-tools/android-accept-licenses.sh "android update sdk --filter \"addon-google_apis-google-23\" --no-ui --force -a" \
   && /opt/sdk-tools/android-accept-licenses.sh "android update sdk --filter \"addon-google_apis-google-25\" --no-ui --force -a" \
   && /opt/sdk-tools/android-accept-licenses.sh "android update sdk --filter \"extra-android-m2repository\" --no-ui --force -a" \
