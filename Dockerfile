@@ -1,4 +1,5 @@
-FROM openjdk:8
+# Inspired from https://github.com/heikomaass/docker-android/blob/master/android-sdk/Dockerfile
+FROM node:6
 MAINTAINER Fabian Köster <fabian.koester@bringnow.com>
 
 ARG DEBIAN_FRONTEND=noninteractive
