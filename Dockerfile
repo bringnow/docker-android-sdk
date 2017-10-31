@@ -62,4 +62,4 @@ RUN /opt/sdk-tools/android-accept-licenses.sh "android update sdk --filter tools
   && /opt/sdk-tools/android-accept-licenses.sh "android update sdk --filter \"extra-android-m2repository\" --no-ui --force -a" \
   && /opt/sdk-tools/android-accept-licenses.sh "android update sdk --filter \"extra-google-m2repository\" --no-ui --force -a" \
   && /opt/sdk-tools/android-accept-licenses.sh "android update sdk --filter \"extra-google-google_play_services\" --no-ui --force -a" \
-  && /opt/sdk-tools/android-accept-licenses.sh "android update sdk --filter \"patcher;v4\" --no-ui --force -a" \
+  && /opt/sdk-tools/android-accept-licenses.sh "android update sdk --no-ui --force -a"
