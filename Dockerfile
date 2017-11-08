@@ -4,6 +4,9 @@ MAINTAINER Fabian Köster <fabian.koester@bringnow.com>
 
 ARG DEBIAN_FRONTEND=noninteractive
 
+ENV LANG C.UTF-8
+ENV LC_ALL C.UTF-8
+
 ENV ANDROID_HOME /opt/android-sdk-linux
 
 RUN bash -c "echo deb http://ftp.debian.org/debian jessie-backports main >> /etc/apt/sources.list" \
