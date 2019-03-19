@@ -28,7 +28,17 @@ RUN curl -o android-sdk.zip https://dl.google.com/android/repository/sdk-tools-l
   && unzip -q -d ${ANDROID_HOME} android-sdk.zip \
   && rm *.zip
 
-ENV PATH ${PATH}:${ANDROID_HOME}/tools:${ANDROID_HOME}/tools/bin
+# Install newer yarn
+ENV YARN_VERSION=1.13.0
+ENV YARN_SHA256=125d40ebf621ebb08e3f66a618bd2cc5cd77fa317a312900a1ab4360ed38bf14
+RUN curl -Lo yarn.tar.gz https://github.com/yarnpkg/yarn/releases/download/v${YARN_VERSION}/yarn-v${YARN_VERSION}.tar.gz \
+    && echo "${YARN_SHA256} yarn.tar.gz" | sha256sum -c \
+    && mkdir -p /opt/yarn \
+    && tar -x -C /opt/yarn --strip-components=1 -f yarn.tar.gz \
+    && rm yarn.tar.gz
+
+
+ENV PATH /opt/yarn/bin:${ANDROID_HOME}/tools:${ANDROID_HOME}/tools/bin:${PATH}
 
 # Install Android SDK components
 RUN mkdir /root/.android \
