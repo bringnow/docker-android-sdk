@@ -40,4 +40,5 @@ RUN mkdir /root/.android \
 		"add-ons;addon-google_apis-google-24" \
 		"extras;android;m2repository" \
 		"extras;google;google_play_services" \
-		"patcher;v4"
+		"patcher;v4" \
+  && yes | sdkmanager --licenses
